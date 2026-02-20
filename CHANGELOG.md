@@ -8,13 +8,11 @@
 ### Changed
 - Update `var.images` mapping for simplified packer naming: `debian-12`, `debian-13`, `pve-9` (packer#48)
 - Cloud-init injects `HOMESTAK_SERVER` + `HOMESTAK_TOKEN` (was `HOMESTAK_SPEC_SERVER` + `HOMESTAK_IDENTITY` + `HOMESTAK_AUTH_TOKEN`) (iac-driver#187, iac-driver#188)
+- Add controller-based bootstrap to cloud-init runcmd for pull mode (iac-driver#163)
 
 ### Documentation
 - Add dependency update validation guidance to CLAUDE.md (homestak-dev#221)
 - Update provider version reference to note Dependabot management (homestak-dev#221)
-
-### Changed
-- Add controller-based bootstrap to cloud-init runcmd for pull mode (iac-driver#163)
   - Curls `install.sh` from controller, clones repos via HTTPS
   - Passes `HOMESTAK_REF=_working` to clone controller's working branch (not master)
   - Passes `SKIP_SITE_CONFIG=1` (VMs get config from pre-resolved specs)

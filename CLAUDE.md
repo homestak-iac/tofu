@@ -85,6 +85,12 @@ variable "spec_server" {
   default = ""  # Empty = disabled, no env vars injected
 }
 
+# dns_servers: Explicit DNS servers for cloud-init network config
+variable "dns_servers" {
+  type    = list(string)
+  default = []  # Empty = use DHCP-provided DNS
+}
+
 # Simple for_each over resolved VMs
 module "vm" {
   source   = "../../proxmox-vm"
