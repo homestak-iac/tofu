@@ -20,9 +20,10 @@ Use iac-driver for manifest-driven VM provisioning:
 
 ```bash
 # Install homestak
-curl -fsSL https://raw.githubusercontent.com/homestak-dev/bootstrap/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/homestak-dev/bootstrap/master/install.sh | sudo bash
 
-# Deploy and test a VM
+# Switch to homestak user, deploy and test a VM
+sudo -iu homestak
 cd ~/lib/iac-driver
 ./run.sh manifest test -M n1-push -H <nodename>
 ```
