@@ -14,7 +14,7 @@ provider "proxmox" {
   ssh {
     agent       = false
     private_key = file(pathexpand(var.ssh_private_key_file))
-    username    = var.ssh_user
+    username    = var.automation_user
     node {
       name    = var.node
       address = var.ssh_host
