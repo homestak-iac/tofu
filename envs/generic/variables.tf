@@ -29,6 +29,12 @@ variable "automation_user" {
   default     = "homestak"
 }
 
+variable "ssh_private_key_file" {
+  description = "Path to SSH private key for provider connection"
+  type        = string
+  default     = "~/.ssh/id_rsa"
+}
+
 variable "ssh_host" {
   description = "SSH host for file uploads (defaults to localhost)"
   type        = string

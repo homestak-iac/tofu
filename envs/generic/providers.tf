@@ -13,7 +13,7 @@ provider "proxmox" {
   insecure  = true
   ssh {
     agent       = false
-    private_key = file("~/.ssh/id_rsa")
+    private_key = file(pathexpand(var.ssh_private_key_file))
     username    = var.ssh_user
     node {
       name    = var.node
