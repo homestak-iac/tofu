@@ -17,12 +17,6 @@ variable "api_token" {
   sensitive   = true
 }
 
-variable "ssh_user" {
-  description = "SSH user for provider connection to PVE host"
-  type        = string
-  default     = "root"
-}
-
 variable "automation_user" {
   description = "User created in VMs via cloud-init (with sudo)"
   type        = string
