@@ -247,10 +247,40 @@ Dependabot opens PRs for provider version bumps. Not all dependencies carry equa
 
 | Dependency | Validation Before Merge | Rationale |
 |------------|------------------------|-----------|
-| bpg/proxmox provider | `./run.sh manifest test -M n1-push -H srv1` | Directly controls VM provisioning via PVE API |
+| bpg/proxmox provider | Integration smoke test required | Directly controls VM provisioning via PVE API |
 | GitHub Actions versions | CI passes = sufficient | Only affects CI, not runtime |
 
 The bpg/proxmox provider is the most critical external dependency — it's the interface between tofu and the PVE API. Behavioral changes (e.g., requiring reboots for CPU changes, cloud-init handling) can silently break VM provisioning. Always run an integration smoke test before approving provider bumps.
+
+### bpg/proxmox Provider Bump Workflow
+
+This is a Simple-tier trunk path task (no sprint needed). Steps:
+
+```bash
+# 1. Check out the Dependabot branch in tofu
+cd ~/homestak-dev/tofu
+git fetch origin
+git checkout dependabot/terraform/envs/generic/bpg/proxmox-<version>
+
+# 2. Regenerate lockfile (gitignored, but needed locally for test)
+cd envs/generic && tofu init -upgrade
+
+# 3. Run integration smoke test from iac-driver (stays on master)
+cd ~/homestak-dev/iac-driver
+./run.sh manifest test -M n1-push -H <host> --verbose
+
+# 4. If passed: approve the PR
+gh pr review <N> --repo homestak-dev/tofu --approve
+
+# 5. Switch tofu back to master
+cd ~/homestak-dev/tofu && git checkout master
+```
+
+**Key points:**
+- Only the `tofu` repo changes branch; `iac-driver` stays on master
+- The `.terraform.lock.hcl` is gitignored — iac-driver's preflight auto-fixes stale lockfiles on target hosts
+- Review the provider changelog for VM/cloud-init behavioral changes before testing
+- If the smoke test fails, investigate whether it's a provider regression or a pre-existing issue
 
 ## Provider Documentation
 
