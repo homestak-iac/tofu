@@ -2,12 +2,19 @@
 
 ## Unreleased
 
-### Breaking
+## v0.53 - 2026-03-06
 
-- **Sudo-less migration**: Cloud-init runcmd uses `HOMESTAK_APPLY=config` instead of explicit `./run.sh config` calls; config-complete marker path changed to `~/etc/state/config-complete.json` (bootstrap#75)
+### Changed
+- Bump bpg/proxmox provider from 0.94.0 to 0.97.1 (#57)
 
 ### Removed
 - Remove unused `var.ssh_user` from generic environment — was declared but never referenced (iac-driver#275)
+
+## v0.52 - 2026-03-02
+
+### Breaking
+
+- **User-owned path model**: Cloud-init runcmd uses `HOMESTAK_APPLY=config` instead of explicit `./run.sh config` calls; config-complete marker path changed to `~/etc/state/config-complete.json` (bootstrap#75)
 
 ## v0.51 - 2026-02-28
 
