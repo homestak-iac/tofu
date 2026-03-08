@@ -136,16 +136,16 @@ export HOMESTAK_TOKEN=eyJ2IjoxLCJuIjoiZGV2MSIsInMiOiJiYXNlIiwiaWF0IjoxNzM5...
 
 ## Related Projects
 
-Part of the [homestak-dev](https://github.com/homestak-dev) organization:
+Part of the [homestak-iac](https://github.com/homestak-iac) organization:
 
 | Repo | Purpose |
 |------|---------|
-| [bootstrap](https://github.com/homestak-dev/bootstrap) | Entry point - curl\|bash setup |
-| [site-config](https://github.com/homestak-dev/site-config) | Site-specific secrets and configuration |
-| [ansible](https://github.com/homestak-dev/ansible) | Proxmox host configuration, PVE installation |
-| [iac-driver](https://github.com/homestak-dev/iac-driver) | Orchestration engine + ConfigResolver |
-| [packer](https://github.com/homestak-dev/packer) | Custom Debian cloud images |
-| [tofu](https://github.com/homestak-dev/tofu) | This project - VM provisioning |
+| [bootstrap](https://github.com/homestak/bootstrap) | Entry point - curl\|bash setup |
+| [config](https://github.com/homestak/config) | Site-specific secrets and configuration |
+| [ansible](https://github.com/homestak-iac/ansible) | Proxmox host configuration, PVE installation |
+| [iac-driver](https://github.com/homestak-iac/iac-driver) | Orchestration engine + ConfigResolver |
+| [packer](https://github.com/homestak-iac/packer) | Custom Debian cloud images |
+| [tofu](https://github.com/homestak-iac/tofu) | This project - VM provisioning |
 
 ## Key Technologies
 
@@ -201,7 +201,7 @@ cd ../packer && ./publish
 ## Prerequisites
 
 - OpenTofu CLI installed
-- site-config repository set up and decrypted (see [site-config](https://github.com/homestak-dev/site-config))
+- site-config repository set up and decrypted (see [config](https://github.com/homestak/config))
 - SSH key at `~/.ssh/id_rsa`
 - Proxmox API access (endpoint + token in site-config)
 - iac-driver for config resolution
@@ -270,7 +270,7 @@ cd ~/homestak-dev/iac-driver
 ./run.sh manifest test -M n1-push -H <host> --verbose
 
 # 4. If passed: approve the PR
-gh pr review <N> --repo homestak-dev/tofu --approve
+gh pr review <N> --repo homestak-iac/tofu --approve
 
 # 5. Switch tofu back to master
 cd ~/homestak-dev/tofu && git checkout master
