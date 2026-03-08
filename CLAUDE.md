@@ -127,7 +127,7 @@ export HOMESTAK_TOKEN=eyJ2IjoxLCJuIjoiZGV2MSIsInMiOiJiYXNlIiwiaWF0IjoxNzM5...
 
 **First-boot behavior (pull mode):**
 1. Cloud-init writes environment variables to `/etc/profile.d/homestak.sh`
-2. runcmd curls `install.sh` from controller (`HOMESTAK_SOURCE`), clones repos via HTTPS with `HOMESTAK_REF=_working` and `SKIP_SITE_CONFIG=1`
+2. runcmd curls `install` from controller (`HOMESTAK_SOURCE`), clones repos via HTTPS with `HOMESTAK_REF=_working` and `SKIP_SITE_CONFIG=1`
 3. Runs `./run.sh config fetch --insecure && ./run.sh config apply` (output logged to `/var/log/homestak-config.log`)
 4. iac-driver fetches spec from server (authenticated by provisioning token)
 5. Spec saved, ansible roles applied, config-complete marker written
@@ -188,7 +188,7 @@ module "cloud_image" {
 
 Packer images must be published before using local mode:
 ```bash
-cd ../packer && ./publish.sh
+cd ../packer && ./publish
 ```
 
 ## Conventions
