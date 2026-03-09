@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Changed
+- Update stale paths for multi-org migration (#72)
+  - `site-config` → `config` in docs and Makefile
+  - GitHub URLs updated to `homestak-iac/tofu`
+
+### Fixed
+- Use `config/.state/` for runtime markers instead of `config/state/`
+- Fix cloud-init bootstrap path and config marker location
+
 ## v0.53 - 2026-03-06
 
 ### Changed
