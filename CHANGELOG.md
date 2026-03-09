@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.54 - 2026-03-08
+
 ### Changed
 - Update stale paths for multi-org migration (#72)
   - `site-config` → `config` in docs and Makefile
