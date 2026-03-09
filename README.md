@@ -8,9 +8,9 @@ This repo provides two things:
 
 1. **Reusable modules** - `proxmox-vm`, `proxmox-file`, `proxmox-sdn` can be used standalone by anyone doing Proxmox + OpenTofu work
 
-2. **homestak integration** - `envs/generic` is the execution layer for [iac-driver](https://github.com/homestak-dev/iac-driver) workflows
+2. **homestak integration** - `envs/generic` is the execution layer for [iac-driver](https://github.com/homestak-iac/iac-driver) workflows
 
-Part of the [homestak-dev](https://github.com/homestak-dev) organization.
+Part of the [homestak-iac](https://github.com/homestak-iac) organization.
 
 ## Quick Start
 
@@ -34,7 +34,7 @@ Use modules directly in your own OpenTofu configuration:
 
 ```hcl
 module "vm" {
-  source = "github.com/homestak-dev/tofu//proxmox-vm"
+  source = "github.com/homestak-iac/tofu//proxmox-vm"
 
   proxmox_node_name    = "pve"
   vm_name              = "my-vm"
@@ -84,8 +84,8 @@ tofu/
 - SSH key at `~/.ssh/id_rsa`
 
 For full homestak integration:
-- [bootstrap](https://github.com/homestak-dev/bootstrap) installed
-- [site-config](https://github.com/homestak-dev/site-config) set up and decrypted
+- [bootstrap](https://github.com/homestak/bootstrap) installed
+- [config](https://github.com/homestak/config) set up and decrypted
 
 ## Documentation
 
@@ -101,11 +101,11 @@ See [CLAUDE.md](CLAUDE.md) for detailed architecture, configuration flow, and kn
 
 | Repo | Purpose |
 |------|---------|
-| [bootstrap](https://github.com/homestak-dev/bootstrap) | Entry point - curl\|bash setup |
-| [site-config](https://github.com/homestak-dev/site-config) | Site-specific secrets and configuration |
-| [ansible](https://github.com/homestak-dev/ansible) | Proxmox host configuration |
-| [iac-driver](https://github.com/homestak-dev/iac-driver) | Orchestration engine |
-| [packer](https://github.com/homestak-dev/packer) | Custom Debian cloud images |
+| [bootstrap](https://github.com/homestak/bootstrap) | Entry point - curl\|bash setup |
+| [config](https://github.com/homestak/config) | Site-specific secrets and configuration |
+| [ansible](https://github.com/homestak-iac/ansible) | Proxmox host configuration |
+| [iac-driver](https://github.com/homestak-iac/iac-driver) | Orchestration engine |
+| [packer](https://github.com/homestak-iac/packer) | Custom Debian cloud images |
 
 ## License
 

@@ -33,7 +33,7 @@ tofu/
 ### Config Resolution Flow
 
 ```
-site-config/                    iac-driver/                    tofu/
+config/                         iac-driver/                    tofu/
 ┌─────────────┐                 ┌──────────────────┐           ┌─────────────┐
 │ manifests/  │                 │ ConfigResolver   │           │ envs/       │
 │ presets/    │───resolve──────▶│ - Load YAML      │──tfvars──▶│ generic/    │
@@ -47,7 +47,7 @@ site-config/                    iac-driver/                    tofu/
 
 **Benefits:**
 - All config logic in Python (more capable than HCL)
-- tofu is a "dumb executor" - no site-config knowledge
+- tofu is a "dumb executor" - no config knowledge
 - Single source of config parsing (no duplication)
 - Template/preset inheritance handled by iac-driver
 
@@ -111,7 +111,7 @@ module "vm" {
 
 **User distinction:**
 - `automation_user` (default: `homestak`) - Non-root user created on VMs via cloud-init, used for SSH access
-- `ssh_user` (from site-config) - User for SSH to PVE hosts (typically `root`)
+- `ssh_user` (from config) - User for SSH to PVE hosts (typically `root`)
 
 ### Create → Config Flow (#231)
 
@@ -195,22 +195,22 @@ cd ../packer && ./publish
 
 - **VM IDs**: 5-digit numeric (vmid_base + index)
 - **MAC prefix**: BC:24:11:*
-- **Hostnames**: Defined in site-config manifest `nodes[]` entries
+- **Hostnames**: Defined in config manifest `nodes[]` entries
 - **Images**: Mapped via `var.images` — `debian-12`, `debian-13`, `pve-9` → `local:iso/{name}.img`. See [packer-pipeline.md](../docs/designs/packer-pipeline.md) for naming conventions.
 
 ## Prerequisites
 
 - OpenTofu CLI installed
-- site-config repository set up and decrypted (see [config](https://github.com/homestak/config))
+- config repository set up and decrypted (see [config](https://github.com/homestak/config))
 - SSH key at `~/.ssh/id_rsa`
-- Proxmox API access (endpoint + token in site-config)
+- Proxmox API access (endpoint + token in config)
 - iac-driver for config resolution
 
 ## Known Issues
 
 ### Debian 12 Cloud-Init First-Boot Kernel Panic
 
-Debian 12 cloud images can kernel panic on first boot when disk is expanded. Fix: add `serial_device {}` to VM resource config.
+Debian 12 cloud images can kernel panic on first boot when disk is expanded. Fix: add `serial_device {}` to VM resource config
 
 ```hcl
 resource "proxmox_virtual_environment_vm" "example" {
@@ -258,7 +258,7 @@ This is a Simple-tier trunk path task (no sprint needed). Steps:
 
 ```bash
 # 1. Check out the Dependabot branch in tofu
-cd ~/homestak-dev/tofu
+cd ~/homestak/iac/tofu
 git fetch origin
 git checkout dependabot/terraform/envs/generic/bpg/proxmox-<version>
 
@@ -266,14 +266,14 @@ git checkout dependabot/terraform/envs/generic/bpg/proxmox-<version>
 cd envs/generic && tofu init -upgrade
 
 # 3. Run integration smoke test from iac-driver (stays on master)
-cd ~/homestak-dev/iac-driver
+cd ~/homestak/iac/iac-driver
 ./run.sh manifest test -M n1-push -H <host> --verbose
 
 # 4. If passed: approve the PR
 gh pr review <N> --repo homestak-iac/tofu --approve
 
 # 5. Switch tofu back to master
-cd ~/homestak-dev/tofu && git checkout master
+cd ~/homestak/iac/tofu && git checkout master
 ```
 
 **Key points:**

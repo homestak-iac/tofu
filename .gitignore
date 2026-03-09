@@ -14,6 +14,6 @@ terraform.tfstate.backup
 terraform.tfstate.*.backup
 tfplan
 
-# Secrets are managed in site-config
-# See: ../site-config/ or https://github.com/homestak-dev/site-config
+# Secrets are managed in config
+# See: ../config/ or https://github.com/homestak/config
 **/data/
