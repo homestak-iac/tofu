@@ -47,9 +47,9 @@ locals {
 %{if var.spec_server != "" && vm.auth_token != ""}
       - |
         # Bootstrap from server + config on first boot (#231)
-        if [ ! -f ~homestak/etc/state/config-complete.json ]; then
+        if [ ! -f ~homestak/config/state/config-complete.json ]; then
           . /etc/profile.d/homestak.sh
-          curl -fsSk "$HOMESTAK_SERVER/bootstrap.git/install.sh" | \
+          curl -fsSk "$HOMESTAK_SERVER/bootstrap.git/install" | \
             HOMESTAK_SOURCE="$HOMESTAK_SERVER" HOMESTAK_REF=_working \
             HOMESTAK_INSECURE=1 SKIP_SITE_CONFIG=1 HOMESTAK_APPLY=config bash
         fi
