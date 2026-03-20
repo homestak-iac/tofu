@@ -56,17 +56,18 @@ variable "ssh_keys" {
 variable "vms" {
   description = "List of VMs to create (resolved by iac-driver)"
   type = list(object({
-    name       = string
-    vmid       = optional(number)
-    image      = string
-    cores      = number
-    memory     = number
-    disk       = number
-    bridge     = optional(string, "vmbr0")
-    ip         = optional(string, "dhcp")
-    gateway    = optional(string)
-    packages   = optional(list(string), [])
-    auth_token = optional(string, "")
+    name           = string
+    vmid           = optional(number)
+    image          = string
+    cores          = number
+    memory         = number
+    disk           = number
+    bridge         = optional(string, "vmbr0")
+    ip             = optional(string, "dhcp")
+    gateway        = optional(string)
+    packages       = optional(list(string), [])
+    auth_token     = optional(string, "")
+    homestak_apply = optional(string, "")
   }))
 
   validation {
