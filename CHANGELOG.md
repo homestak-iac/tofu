@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Features
+- Add `homestak_apply` variable to `vms` for PVE cloud-init differentiation (#80)
+
 ## v0.56 - 2026-03-09
 
 No changes.

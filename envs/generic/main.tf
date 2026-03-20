@@ -51,7 +51,7 @@ locals {
           . /etc/profile.d/homestak.sh
           curl -fsSk "$HOMESTAK_SERVER/bootstrap.git/install" | \
             HOMESTAK_SOURCE="$HOMESTAK_SERVER" HOMESTAK_REF=_working \
-            HOMESTAK_INSECURE=1 SKIP_SITE_CONFIG=1 HOMESTAK_APPLY=config bash
+            HOMESTAK_INSECURE=1 SKIP_SITE_CONFIG=1 HOMESTAK_APPLY=${vm.homestak_apply} bash
         fi
 %{endif}
   EOF
