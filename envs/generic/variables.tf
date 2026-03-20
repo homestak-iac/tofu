@@ -67,7 +67,7 @@ variable "vms" {
     gateway        = optional(string)
     packages       = optional(list(string), [])
     auth_token     = optional(string, "")
-    homestak_apply = optional(string, "")
+    boot_scenario  = optional(string, "")
   }))
 
   validation {
@@ -99,8 +99,8 @@ variable "dns_servers" {
 }
 
 # Server URL for provisioning token flow (#231, env var: HOMESTAK_SERVER)
-variable "spec_server" {
-  description = "Server URL for provisioning token and bootstrap (becomes HOMESTAK_SERVER)"
+variable "server_url" {
+  description = "Server URL for provisioning and bootstrap (becomes HOMESTAK_SERVER)"
   type        = string
   default     = ""
 }

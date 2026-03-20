@@ -30,28 +30,28 @@ locals {
     packages:
       - qemu-guest-agent
       ${indent(4, join("\n", formatlist("- %s", vm.packages)))}
-%{if var.spec_server != "" && vm.auth_token != ""}
+%{if var.server_url != "" && vm.auth_token != ""}
 
     write_files:
       - path: /etc/profile.d/homestak.sh
         permissions: '0644'
         content: |
           # Homestak provisioning environment variables (#231)
-          export HOMESTAK_SERVER=${var.spec_server}
+          export HOMESTAK_SERVER=${var.server_url}
           export HOMESTAK_TOKEN=${vm.auth_token}
 %{endif}
 
     runcmd:
       - systemctl enable qemu-guest-agent
       - systemctl start qemu-guest-agent
-%{if var.spec_server != "" && vm.auth_token != ""}
+%{if var.server_url != "" && vm.auth_token != ""}
       - |
         # Bootstrap from server + config on first boot (#231)
         if [ ! -f ~homestak/config/.state/config-complete.json ]; then
           . /etc/profile.d/homestak.sh
           curl -fsSk "$HOMESTAK_SERVER/bootstrap.git/install" | \
-            HOMESTAK_SOURCE="$HOMESTAK_SERVER" HOMESTAK_REF=_working \
-            HOMESTAK_INSECURE=1 HOMESTAK_APPLY=${vm.homestak_apply} bash
+            HOMESTAK_SERVER="$HOMESTAK_SERVER" HOMESTAK_REF=_working \
+            HOMESTAK_INSECURE=1 HOMESTAK_BOOT_SCENARIO=${vm.boot_scenario} bash
         fi
 %{endif}
   EOF
