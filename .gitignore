@@ -17,3 +17,6 @@ tfplan
 # Secrets are managed in config
 # See: ../config/ or https://github.com/homestak/config
 **/data/
+
+# Claude Code local settings
+.claude/settings.local.json

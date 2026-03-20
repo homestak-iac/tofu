@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "__ Validation __",
+      "Bash(tofu fmt *)",
+      "Bash(tofu validate *)",
+
+      "__ Build __",
+      "Bash(make *)",
+
+      "__ Claude Code tools __",
+      "Read",
+      "Edit",
+      "Write"
+    ],
+    "deny": [
+      "Bash(tofu apply *)",
+      "Bash(tofu destroy *)",
+      "Bash(tofu import *)"
+    ]
+  }
+}
