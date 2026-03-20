@@ -5,6 +5,9 @@
 ### Features
 - Add `homestak_apply` variable to `vms` for PVE cloud-init differentiation (#80)
 
+### Changed
+- Clone config repo during bootstrap (removed `SKIP_SITE_CONFIG=1` from cloud-init)
+
 ## v0.56 - 2026-03-09
 
 No changes.
