@@ -16,7 +16,7 @@ locals {
     hostname: ${name}
 
     users:
-      - name: ${var.automation_user}
+      - name: ${var.vm_user}
         groups: sudo
         shell: /bin/bash
         sudo: ALL=(ALL) NOPASSWD:ALL

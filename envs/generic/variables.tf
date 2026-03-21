@@ -17,10 +17,16 @@ variable "api_token" {
   sensitive   = true
 }
 
-variable "automation_user" {
+variable "vm_user" {
   description = "User created in VMs via cloud-init (with sudo)"
   type        = string
   default     = "homestak"
+}
+
+variable "host_user" {
+  description = "SSH user for PVE host connections (for provider SSH)"
+  type        = string
+  default     = "root"
 }
 
 variable "ssh_private_key_file" {
