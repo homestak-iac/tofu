@@ -12,11 +12,8 @@
 - Change `homestak_apply` to `boot_scenario` in `vms` object (#318)
 - Change cloud-init to use `HOMESTAK_SERVER` and `HOMESTAK_BOOT_SCENARIO` env vars (#314, #318)
 
-### Added
-- Add `host_user` variable for provider SSH to PVE host (#342)
-
 ### Fixed
-- Fix `providers.tf` to use `host_user` instead of `automation_user` for PVE SSH (#342)
+- Fix provider SSH to continue using `vm_user` — `host_user` was incorrectly introduced in Sprint 1 (reverted, see iac-driver#133)
 
 ## v0.56 - 2026-03-09
 

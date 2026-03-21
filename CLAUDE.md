@@ -100,11 +100,6 @@ variable "vm_user" {
   default = "homestak"  # Created via cloud-init with sudo access
 }
 
-variable "host_user" {
-  type    = string
-  default = "root"  # SSH user for PVE host connections (provider SSH)
-}
-
 # dns_servers (v0.50+): Explicit DNS servers for cloud-init
 variable "dns_servers" {
   type    = list(string)
@@ -137,7 +132,6 @@ module "vm" {
 
 **User distinction:**
 - `vm_user` (default: `homestak`) - Non-root user created on VMs via cloud-init, used for SSH access
-- `host_user` (default: `root`) - User for SSH to PVE hosts (provider SSH connection)
 
 ### Create → Config Flow (#231)
 
