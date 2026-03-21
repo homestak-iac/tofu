@@ -23,12 +23,6 @@ variable "vm_user" {
   default     = "homestak"
 }
 
-variable "host_user" {
-  description = "SSH user for PVE host connections (for provider SSH)"
-  type        = string
-  default     = "root"
-}
-
 variable "ssh_private_key_file" {
   description = "Path to SSH private key for provider connection"
   type        = string
