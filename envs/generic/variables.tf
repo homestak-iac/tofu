@@ -17,10 +17,16 @@ variable "api_token" {
   sensitive   = true
 }
 
-variable "automation_user" {
+variable "vm_user" {
   description = "User created in VMs via cloud-init (with sudo)"
   type        = string
   default     = "homestak"
+}
+
+variable "host_user" {
+  description = "SSH user for PVE host connections (for provider SSH)"
+  type        = string
+  default     = "root"
 }
 
 variable "ssh_private_key_file" {
@@ -56,18 +62,18 @@ variable "ssh_keys" {
 variable "vms" {
   description = "List of VMs to create (resolved by iac-driver)"
   type = list(object({
-    name           = string
-    vmid           = optional(number)
-    image          = string
-    cores          = number
-    memory         = number
-    disk           = number
-    bridge         = optional(string, "vmbr0")
-    ip             = optional(string, "dhcp")
-    gateway        = optional(string)
-    packages       = optional(list(string), [])
-    auth_token     = optional(string, "")
-    homestak_apply = optional(string, "")
+    name          = string
+    vmid          = optional(number)
+    image         = string
+    cores         = number
+    memory        = number
+    disk          = number
+    bridge        = optional(string, "vmbr0")
+    ip            = optional(string, "dhcp")
+    gateway       = optional(string)
+    packages      = optional(list(string), [])
+    auth_token    = optional(string, "")
+    boot_scenario = optional(string, "")
   }))
 
   validation {
@@ -99,8 +105,8 @@ variable "dns_servers" {
 }
 
 # Server URL for provisioning token flow (#231, env var: HOMESTAK_SERVER)
-variable "spec_server" {
-  description = "Server URL for provisioning token and bootstrap (becomes HOMESTAK_SERVER)"
+variable "server_url" {
+  description = "Server URL for provisioning and bootstrap (becomes HOMESTAK_SERVER)"
   type        = string
   default     = ""
 }

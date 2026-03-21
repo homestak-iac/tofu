@@ -95,9 +95,14 @@ variable "vms" {
 }
 
 # automation_user (v0.41+): Non-root user for VM SSH access
-variable "automation_user" {
+variable "vm_user" {
   type    = string
   default = "homestak"  # Created via cloud-init with sudo access
+}
+
+variable "host_user" {
+  type    = string
+  default = "root"  # SSH user for PVE host connections (provider SSH)
 }
 
 # dns_servers (v0.50+): Explicit DNS servers for cloud-init
@@ -106,8 +111,8 @@ variable "dns_servers" {
   default = []  # Empty = use DHCP-provided DNS
 }
 
-# spec_server (v0.45+): Spec server URL for create → config flow
-variable "spec_server" {
+# server_url (v0.45+): Server URL for create → config flow
+variable "server_url" {
   type    = string
   default = ""  # Empty = disabled, no env vars injected
 }
@@ -131,12 +136,12 @@ module "vm" {
 ```
 
 **User distinction:**
-- `automation_user` (default: `homestak`) - Non-root user created on VMs via cloud-init, used for SSH access
-- `ssh_user` (from config) - User for SSH to PVE hosts (typically `root`)
+- `vm_user` (default: `homestak`) - Non-root user created on VMs via cloud-init, used for SSH access
+- `host_user` (default: `root`) - User for SSH to PVE hosts (provider SSH connection)
 
 ### Create → Config Flow (#231)
 
-When `spec_server` is configured in `site.yaml` and a `spec` FK is set on the node, VMs are provisioned with environment variables for automatic spec discovery and self-configuration:
+When `server_url` is configured in `site.yaml` and a `spec` FK is set on the node, VMs are provisioned with environment variables for automatic spec discovery and self-configuration:
 
 ```yaml
 # Cloud-init writes /etc/profile.d/homestak.sh:
@@ -148,12 +153,12 @@ export HOMESTAK_TOKEN=eyJ2IjoxLCJuIjoiZGV2MSIsInMiOiJiYXNlIiwiaWF0IjoxNzM5...
 
 **First-boot behavior (pull mode):**
 1. Cloud-init writes environment variables to `/etc/profile.d/homestak.sh`
-2. runcmd curls `install` from controller (`HOMESTAK_SOURCE`), clones repos via HTTPS with `HOMESTAK_REF=_working` and `SKIP_SITE_CONFIG=1`
+2. runcmd curls `install` from controller (`HOMESTAK_SERVER`), clones repos via HTTPS with `HOMESTAK_REF=_working` and `SKIP_SITE_CONFIG=1`
 3. Runs `./run.sh config fetch --insecure && ./run.sh config apply` (output logged to `/var/log/homestak-config.log`)
 4. iac-driver fetches spec from server (authenticated by provisioning token)
 5. Spec saved, ansible roles applied, config-complete marker written
 
-**Token conditional:** Both `spec_server` and `auth_token` must be non-empty for cloud-init to inject env vars. If either is missing, the VM boots without homestak integration.
+**Token conditional:** Both `server_url` and `auth_token` must be non-empty for cloud-init to inject env vars. If either is missing, the VM boots without homestak integration.
 
 ## Related Projects
 
