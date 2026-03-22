@@ -8,8 +8,8 @@ This repo is part of the homestak polyrepo workspace. For project architecture,
 development lifecycle, sprint/release process, and cross-repo conventions, see:
 
 - `~/homestak/dev/meta/CLAUDE.md` — primary reference
-- `docs/lifecycle/` in meta — 7-phase development process
-- `docs/CLAUDE-GUIDELINES.md` in meta — documentation standards
+- `docs/process/` in meta — 7-phase development process
+- `docs/standards/claude-guidelines.md` in meta — documentation standards
 
 When working in a scoped session (this repo only), follow the same sprint/release
 process defined in meta. Use `/session save` before context compaction and
@@ -216,7 +216,7 @@ cd ../packer && ./publish
 - **VM IDs**: 5-digit numeric (vmid_base + index)
 - **MAC prefix**: BC:24:11:*
 - **Hostnames**: Defined in config manifest `nodes[]` entries
-- **Images**: Mapped via `var.images` — `debian-12`, `debian-13`, `pve-9` → `local:iso/{name}.img`. See [packer-pipeline.md](../docs/designs/packer-pipeline.md) for naming conventions.
+- **Images**: Mapped via `var.images` — `debian-12`, `debian-13`, `pve-9` → `local:iso/{name}.img`. See [packer-pipeline.md](../packer/docs/packer-pipeline.md) for naming conventions.
 
 ## Prerequisites
 
