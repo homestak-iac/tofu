@@ -216,7 +216,7 @@ cd ../packer && ./publish
 - **VM IDs**: 5-digit numeric (vmid_base + index)
 - **MAC prefix**: BC:24:11:*
 - **Hostnames**: Defined in config manifest `nodes[]` entries
-- **Images**: Mapped via `var.images` — `debian-12`, `debian-13`, `pve-9` → `local:iso/{name}.img`. See [packer-pipeline.md](../packer/docs/packer-pipeline.md) for naming conventions.
+- **Images**: Mapped via `var.images` — `debian-12`, `debian-13`, `pve-9` → `local:iso/{name}.img`. See `$HOMESTAK_ROOT/iac/packer/docs/packer-pipeline.md` for naming conventions.
 
 ## Prerequisites
 
